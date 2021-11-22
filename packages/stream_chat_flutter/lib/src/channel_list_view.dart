@@ -313,10 +313,10 @@ class _ChannelListViewState extends State<ChannelListView> {
                   //   size: 136,
                   //   color: chatThemeData.colorTheme.disabled,
                   // ),
-                  SvgPicture.asset(
-                    ImageAssets.message_placeholder,
+                  StreamSvgIcon.message_new(
+                    size: 90,
                   ),
-                  SizedBox(height: 8),
+                  SizedBox(height: 22),
                   Padding(
                     padding: EdgeInsets.fromLTRB(80, 0, 80, 0),
                     child: Text(

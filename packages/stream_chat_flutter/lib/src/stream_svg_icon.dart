@@ -338,6 +338,17 @@ class StreamSvgIcon extends StatelessWidget {
       );
 
   /// [StreamSvgIcon] type
+  factory StreamSvgIcon.message_new({
+    double? size,
+    Color? color,
+  }) => StreamSvgIcon(
+      assetName: 'ic_message_placeholder.svg',
+      color: color,
+      width: size,
+      height: size,
+    );
+
+  /// [StreamSvgIcon] type
   factory StreamSvgIcon.userRemove({
     double? size,
     Color? color,
