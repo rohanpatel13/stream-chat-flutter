@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_chat_flutter/src/back_button.dart';
 import 'package:stream_chat_flutter/src/channel_info.dart';
 import 'package:stream_chat_flutter/src/channel_name.dart';
@@ -178,7 +179,10 @@ class ChannelHeader extends StatelessWidget implements PreferredSizeWidget {
                   children: <Widget>[
                     title ??
                         ChannelName(
-                          textStyle: channelHeaderTheme.titleStyle,
+                          textStyle: channelHeaderTheme.titleStyle!.copyWith(
+                              fontSize: ScreenUtil().setSp(16.0),
+                              fontFamily: 'Poppins'
+                          ),
                         ),
                     const SizedBox(height: 2),
                     subtitle ??

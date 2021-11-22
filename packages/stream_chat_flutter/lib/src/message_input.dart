@@ -7,6 +7,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:photo_manager/photo_manager.dart';
@@ -702,8 +703,10 @@ class MessageInputState extends State<MessageInput> {
                     keyboardType: widget.keyboardType,
                     controller: textEditingController,
                     focusNode: _focusNode,
-                    style: _messageInputTheme.inputTextStyle,
-                    autofocus: widget.autofocus,
+                    style: _messageInputTheme.inputTextStyle!.copyWith(
+                      fontSize: ScreenUtil().setSp(17.0),
+                      fontFamily: 'Poppins',
+                    ),                    autofocus: widget.autofocus,
                     textAlignVertical: TextAlignVertical.center,
                     decoration: _getInputDecoration(context),
                     textCapitalization: TextCapitalization.sentences,
@@ -724,6 +727,8 @@ class MessageInputState extends State<MessageInput> {
       hintText: _getHint(context),
       hintStyle: _messageInputTheme.inputTextStyle!.copyWith(
         color: _streamChatTheme.colorTheme.textLowEmphasis,
+        fontSize: ScreenUtil().setSp(17.0),
+        fontFamily: 'Poppins',
       ),
       border: const OutlineInputBorder(
         borderSide: BorderSide(

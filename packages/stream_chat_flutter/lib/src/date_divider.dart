@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:stream_chat_flutter/src/extension.dart';
 import 'package:stream_chat_flutter/src/stream_chat_theme.dart';
@@ -48,6 +49,7 @@ class DateDivider extends StatelessWidget {
           dayInfo,
           style: chatThemeData.textTheme.footnote.copyWith(
             color: chatThemeData.colorTheme.barsBg,
+            fontSize: ScreenUtil().setSp(14.0),
           ),
         ),
       ),

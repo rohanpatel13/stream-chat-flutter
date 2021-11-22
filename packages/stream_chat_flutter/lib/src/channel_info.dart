@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:stream_chat_flutter/src/extension.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
@@ -83,7 +84,10 @@ class ChannelInfo extends StatelessWidget {
           alternativeWidget = Text(
             '${context.translations.userLastOnlineText} '
             '${Jiffy(otherMember.user?.lastActive).fromNow()}',
-            style: textStyle,
+            style: textStyle!.copyWith(
+                fontSize: ScreenUtil().setSp(14.0),
+                fontFamily: 'Poppins'
+            ),
           );
         }
       }

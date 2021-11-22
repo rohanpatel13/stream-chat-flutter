@@ -2,11 +2,13 @@ import 'package:collection/collection.dart'
     show IterableExtension, ListEquality;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:stream_chat_flutter/src/extension.dart';
 import 'package:stream_chat_flutter/src/stream_svg_icon.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 import 'package:stream_chat_flutter_core/stream_chat_flutter_core.dart';
+
 
 /// ![screenshot](https://raw.githubusercontent.com/GetStream/stream-chat-flutter/master/packages/stream_chat_flutter/screenshots/channel_preview.png)
 /// ![screenshot](https://raw.githubusercontent.com/GetStream/stream-chat-flutter/master/packages/stream_chat_flutter/screenshots/channel_preview_paint.png)
@@ -91,7 +93,11 @@ class ChannelPreview extends StatelessWidget {
               Flexible(
                 child: title ??
                     ChannelName(
-                      textStyle: channelPreviewTheme.titleStyle,
+                      textStyle: channelPreviewTheme.titleStyle!.copyWith(
+                          fontFamily: 'Poppins',
+                          fontSize: ScreenUtil().setSp(16.0),
+                          fontWeight: FontWeight.w700
+                      ),
                     ),
               ),
               BetterStreamBuilder<List<Member>>(
@@ -244,12 +250,16 @@ class ChannelPreview extends StatelessWidget {
                 lastMessage.attachments,
                 channelPreviewTheme.subtitleStyle?.copyWith(
                   color: channelPreviewTheme.subtitleStyle?.color,
+                  fontFamily: 'Poppins',
+                  fontSize: ScreenUtil().setSp(15.0),
                   fontStyle: (lastMessage.isSystem || lastMessage.isDeleted)
                       ? FontStyle.italic
                       : FontStyle.normal,
                 ),
                 channelPreviewTheme.subtitleStyle?.copyWith(
                   color: channelPreviewTheme.subtitleStyle?.color,
+                  fontFamily: 'Poppins',
+                  fontSize: ScreenUtil().setSp(15.0),
                   fontStyle: (lastMessage.isSystem || lastMessage.isDeleted)
                       ? FontStyle.italic
                       : FontStyle.normal,

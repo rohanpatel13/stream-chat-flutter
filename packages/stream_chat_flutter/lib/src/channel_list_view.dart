@@ -86,7 +86,7 @@ class ChannelListView extends StatefulWidget {
     this.separatorBuilder,
     this.onImageTap,
     this.onStartChatPressed,
-    this.swipeToAction = false,
+    this.swipeToAction = true,
     this.pullToRefresh = true,
     this.crossAxisCount = 1,
     this.padding,
@@ -318,7 +318,7 @@ class _ChannelListViewState extends State<ChannelListView> {
                   ),
                   SizedBox(height: 22),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(80, 0, 80, 0),
+                    padding: EdgeInsets.fromLTRB(75, 0, 75, 0),
                     child: Text(
                       context.translations.letsStartChattingLabel,
                       textAlign: TextAlign.center,
@@ -544,42 +544,42 @@ class _ChannelListViewState extends State<ChannelListView> {
         ))
             .toList() ??
             <Widget>[
-              IconSlideAction(
-                color: backgroundColor,
-                icon: Icons.more_horiz,
-                onTap: widget.onMoreDetailsPressed != null
-                    ? () {
-                  widget.onMoreDetailsPressed!(channel);
-                }
-                    : () {
-                  showModalBottomSheet(
-                    clipBehavior: Clip.hardEdge,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(32),
-                        topRight: Radius.circular(32),
-                      ),
-                    ),
-                    context: context,
-                    builder: (context) => StreamChannel(
-                      channel: channel,
-                      child: ChannelBottomSheet(
-                        onViewInfoTap: () {
-                          widget.onViewInfoTap?.call(channel);
-                        },
-                      ),
-                    ),
-                  );
-                },
-              ),
-              if ([
-                'admin',
-                'owner',
-              ].contains(channel.state!.members
-                  .firstWhereOrNull(
-                    (m) => m.userId == channel.client.state.currentUser?.id,
-              )
-                  ?.role))
+              // IconSlideAction(
+              //   color: backgroundColor,
+              //   icon: Icons.more_horiz,
+              //   onTap: widget.onMoreDetailsPressed != null
+              //       ? () {
+              //     widget.onMoreDetailsPressed!(channel);
+              //   }
+              //       : () {
+              //     showModalBottomSheet(
+              //       clipBehavior: Clip.hardEdge,
+              //       shape: const RoundedRectangleBorder(
+              //         borderRadius: BorderRadius.only(
+              //           topLeft: Radius.circular(32),
+              //           topRight: Radius.circular(32),
+              //         ),
+              //       ),
+              //       context: context,
+              //       builder: (context) => StreamChannel(
+              //         channel: channel,
+              //         child: ChannelBottomSheet(
+              //           onViewInfoTap: () {
+              //             widget.onViewInfoTap?.call(channel);
+              //           },
+              //         ),
+              //       ),
+              //     );
+              //   },
+              // ),
+              // if ([
+              //   'admin',
+              //   'owner',
+              // ].contains(channel.state!.members
+              //     .firstWhereOrNull(
+              //       (m) => m.userId == channel.client.state.currentUser?.id,
+              // )
+              //     ?.role))
                 IconSlideAction(
                   color: backgroundColor,
                   iconWidget: StreamSvgIcon.delete(
@@ -603,6 +603,7 @@ class _ChannelListViewState extends State<ChannelListView> {
                     );
                     if (res == true) {
                       await channel.delete();
+                      await channel.hide(clearHistory: true);
                     }
                   },
                 ),

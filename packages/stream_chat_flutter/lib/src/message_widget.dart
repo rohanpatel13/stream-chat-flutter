@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_portal/flutter_portal.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:stream_chat_flutter/src/attachment/url_attachment.dart';
 import 'package:stream_chat_flutter/src/extension.dart';
@@ -931,7 +932,10 @@ class _MessageWidgetState extends State<MessageWidget>
       if (showTimeStamp)
         Text(
           Jiffy(widget.message.createdAt.toLocal()).jm,
-          style: widget.messageTheme.createdAtStyle,
+          style: widget.messageTheme.createdAtStyle!.copyWith(
+              fontSize: ScreenUtil().setSp(13.0),
+            fontFamily: 'Poppins',
+          ),
         ),
       if (showSendingIndicator) _buildSendingIndicator(),
     ]);
@@ -998,7 +1002,10 @@ class _MessageWidgetState extends State<MessageWidget>
       widget.message.user?.name ?? '',
       maxLines: 1,
       key: usernameKey,
-      style: widget.messageTheme.messageAuthorStyle,
+      style: widget.messageTheme.messageAuthorStyle!.copyWith(
+          fontSize: ScreenUtil().setSp(13.0),
+        fontFamily: 'Poppins',
+      ),
       overflow: TextOverflow.ellipsis,
     );
   }
@@ -1313,7 +1320,10 @@ class _MessageWidgetState extends State<MessageWidget>
                             fontSize: 42,
                           ),
                         )
-                      : widget.messageTheme,
+                      : widget.messageTheme.copyWith(messageTextStyle: widget.messageTheme.messageTextStyle!.copyWith(
+                    fontFamily: 'Poppins',
+                    fontSize: ScreenUtil().setSp(17.0),
+                  )),
                 ),
         ),
         if (hasUrlAttachments && !hasQuotedMessage) _buildUrlAttachment(),
