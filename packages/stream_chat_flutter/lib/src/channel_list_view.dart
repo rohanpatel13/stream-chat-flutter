@@ -325,8 +325,10 @@ class _ChannelListViewState extends State<ChannelListView> {
                       style: TextStyle(
                           fontFamily: 'Poppins',
                           color: ColorAssets.colorgrey,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600),
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                          height: 1.5
+                      ),
                     ),
                   ),
                   // Padding(
