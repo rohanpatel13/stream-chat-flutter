@@ -7,9 +7,9 @@ import 'package:stream_chat_flutter/src/channel_bottom_sheet.dart';
 import 'package:stream_chat_flutter/src/extension.dart';
 import 'package:stream_chat_flutter/src/stream_svg_icon.dart';
 import 'package:stream_chat_flutter/src/theme/themes.dart';
-import 'package:stream_chat_flutter/src/utils/color_asset.dart';
-import 'package:stream_chat_flutter/src/utils/image_assets.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
+import 'package:stream_chat_flutter/utils/color_asset.dart';
+import 'package:stream_chat_flutter/utils/image_assets.dart';
 import 'package:stream_chat_flutter_core/stream_chat_flutter_core.dart';
 
 
