@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:stream_chat_flutter/src/channel_bottom_sheet.dart';
 import 'package:stream_chat_flutter/src/extension.dart';
@@ -312,7 +313,7 @@ class _ChannelListViewState extends State<ChannelListView> {
                   //   size: 136,
                   //   color: chatThemeData.colorTheme.disabled,
                   // ),
-                  Image.asset(
+                  SvgPicture.asset(
                     ImageAssets.message_placeholder,
                   ),
                   SizedBox(height: 8),
