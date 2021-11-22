@@ -48,6 +48,7 @@ dependencies:
 flutter:
   assets:
     - images/
+    - assets/icons/
     - svgs/
     - lib/svgs/
     - animations/

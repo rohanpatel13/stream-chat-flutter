@@ -8,8 +8,10 @@ import 'package:stream_chat_flutter/src/extension.dart';
 import 'package:stream_chat_flutter/src/stream_svg_icon.dart';
 import 'package:stream_chat_flutter/src/theme/themes.dart';
 import 'package:stream_chat_flutter/src/utils/color_asset.dart';
+import 'package:stream_chat_flutter/src/utils/image_assets.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 import 'package:stream_chat_flutter_core/stream_chat_flutter_core.dart';
+
 
 
 /// Callback called when tapping on a channel
@@ -306,13 +308,16 @@ class _ChannelListViewState extends State<ChannelListView> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  StreamSvgIcon.message(
-                    size: 136,
-                    color: chatThemeData.colorTheme.disabled,
+                  // StreamSvgIcon.message(
+                  //   size: 136,
+                  //   color: chatThemeData.colorTheme.disabled,
+                  // ),
+                  Image.asset(
+                    ImageAssets.message_placeholder,
                   ),
                   SizedBox(height: 8),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(52, 0, 52, 0),
+                    padding: EdgeInsets.fromLTRB(80, 0, 80, 0),
                     child: Text(
                       context.translations.letsStartChattingLabel,
                       textAlign: TextAlign.center,
