@@ -577,7 +577,7 @@ class DefaultTranslations implements Translations {
   String get noTitleText => 'No title';
 
   @override
-  String get letsStartChattingLabel => 'Let’s start chatting!';
+  String get letsStartChattingLabel => 'You can message your Mutual Crushes, so start Crushing!';
 
   @override
   String get sendingFirstMessageLabel =>

@@ -53,6 +53,18 @@ flutter:
     - animations/
   uses-material-design: true
 
+fonts:
+  - family: Poppins
+    fonts:
+      - asset: assets/fonts/roboto_regular_fonts.ttf
+        weight: 400
+      - asset: assets/fonts/roboto_medium_fonts.ttf
+        weight: 500
+      - asset: assets/fonts/roboto_bold_fonts.ttf
+        weight: 600
+      - asset: assets/fonts/roboto_black_fonts.ttf
+        weight: 700
+
 dev_dependencies:
   dart_code_metrics: ^4.4.0
   flutter_test:
