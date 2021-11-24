@@ -706,7 +706,7 @@ class MessageInputState extends State<MessageInput> {
                     controller: textEditingController,
                     focusNode: _focusNode,
                     style: _messageInputTheme.inputTextStyle!.copyWith(
-                      fontSize: ScreenUtil().setSp(17.0),
+                      fontSize: ScreenUtil().setSp(17.0).toDouble(),
                       fontWeight: FontWeight.normal,
                       fontFamily: 'Poppins',
                     ),
@@ -731,7 +731,7 @@ class MessageInputState extends State<MessageInput> {
       hintText: _getHint(context),
       hintStyle: _messageInputTheme.inputTextStyle!.copyWith(
         color: _streamChatTheme.colorTheme.textLowEmphasis,
-        fontSize: ScreenUtil().setSp(17.0),
+        fontSize: ScreenUtil().setSp(17.0).toDouble(),
         fontWeight: FontWeight.normal,
         fontFamily: 'Poppins',
       ),

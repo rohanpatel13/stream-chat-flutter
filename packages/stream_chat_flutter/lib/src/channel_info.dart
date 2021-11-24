@@ -85,7 +85,7 @@ class ChannelInfo extends StatelessWidget {
             '${context.translations.userLastOnlineText} '
             '${Jiffy(otherMember.user?.lastActive).fromNow()}',
             style: textStyle!.copyWith(
-                fontSize: ScreenUtil().setSp(14.0),
+                fontSize: ScreenUtil().setSp(14.0).toDouble(),
                 fontFamily: 'Poppins'
             ),
           );

@@ -212,10 +212,9 @@ class GiphyAttachment extends AttachmentWidget {
                         child: Text(
                           context.translations.sendLabel,
                           style: TextStyle(
-                            // color: StreamChatTheme.of(context)
-                            //     .colorTheme
-                            //     .accentPrimary,
-                            color: ColorAssets.colorRazz,
+                            color: StreamChatTheme.of(context)
+                                .colorTheme
+                                .accentPrimary,
                             fontWeight: FontWeight.bold,
                           ),
                         ),

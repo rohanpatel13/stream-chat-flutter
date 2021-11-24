@@ -210,7 +210,7 @@ class ChannelHeader extends StatelessWidget implements PreferredSizeWidget {
                     const SizedBox(width: 6),
                     title ?? ChannelName(
                         textStyle: channelHeaderTheme.titleStyle!.copyWith(
-                            fontSize: ScreenUtil().setSp(16.0),
+                            fontSize: ScreenUtil().setSp(16.0).toDouble(),
                             fontFamily: 'Poppins'
                         ),
                       ),

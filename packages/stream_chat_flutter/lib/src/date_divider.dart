@@ -49,7 +49,7 @@ class DateDivider extends StatelessWidget {
           dayInfo,
           style: chatThemeData.textTheme.footnote.copyWith(
             color: chatThemeData.colorTheme.barsBg,
-            fontSize: ScreenUtil().setSp(14.0),
+            fontSize: ScreenUtil().setSp(14.0).toDouble(),
           ),
         ),
       ),
