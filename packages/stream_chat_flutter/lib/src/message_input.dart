@@ -620,6 +620,7 @@ class MessageInputState extends State<MessageInput> {
         firstCurve: Curves.easeOut,
         secondCurve: Curves.easeIn,
         firstChild: IconButton(
+          iconSize: 35,
           onPressed: () {
             if (_actionsShrunk) {
               setState(() => _actionsShrunk = false);
@@ -631,15 +632,16 @@ class MessageInputState extends State<MessageInput> {
                 ? pi
                 : 0,
             child: StreamSvgIcon.emptyCircleLeft(
+              size: 35,
               color: _messageInputTheme.expandButtonColor,
             ),
           ),
           padding: const EdgeInsets.all(0),
           constraints: const BoxConstraints.tightFor(
-            height: 24,
-            width: 24,
+            height: 35,
+            width: 35,
           ),
-          splashRadius: 24,
+          splashRadius: 35,
         ),
         secondChild: widget.disableAttachments &&
                 !widget.showCommandsButton &&
@@ -705,8 +707,10 @@ class MessageInputState extends State<MessageInput> {
                     focusNode: _focusNode,
                     style: _messageInputTheme.inputTextStyle!.copyWith(
                       fontSize: ScreenUtil().setSp(17.0),
+                      fontWeight: FontWeight.normal,
                       fontFamily: 'Poppins',
-                    ),                    autofocus: widget.autofocus,
+                    ),
+                    autofocus: widget.autofocus,
                     textAlignVertical: TextAlignVertical.center,
                     decoration: _getInputDecoration(context),
                     textCapitalization: TextCapitalization.sentences,
@@ -728,6 +732,7 @@ class MessageInputState extends State<MessageInput> {
       hintStyle: _messageInputTheme.inputTextStyle!.copyWith(
         color: _streamChatTheme.colorTheme.textLowEmphasis,
         fontSize: ScreenUtil().setSp(17.0),
+        fontWeight: FontWeight.normal,
         fontFamily: 'Poppins',
       ),
       border: const OutlineInputBorder(
@@ -1003,7 +1008,9 @@ class MessageInputState extends State<MessageInput> {
                 Row(
                   children: [
                     IconButton(
+                      iconSize: 40,
                       icon: StreamSvgIcon.pictures(
+                        size: 40,
                         color: _getIconColor(0),
                       ),
                       onPressed:
@@ -1016,8 +1023,9 @@ class MessageInputState extends State<MessageInput> {
                                 },
                     ),
                     IconButton(
-                      iconSize: 32,
+                      iconSize: 40,
                       icon: StreamSvgIcon.files(
+                        size: 40,
                         color: _getIconColor(1),
                       ),
                       onPressed:
@@ -1028,7 +1036,9 @@ class MessageInputState extends State<MessageInput> {
                                 },
                     ),
                     IconButton(
+                      iconSize: 40,
                       icon: StreamSvgIcon.camera(
+                        size: 40,
                         color: _getIconColor(2),
                       ),
                       onPressed: attachmentLimitCrossed ||
@@ -1043,8 +1053,10 @@ class MessageInputState extends State<MessageInput> {
                             },
                     ),
                     IconButton(
+                      iconSize: 40,
                       padding: const EdgeInsets.all(0),
                       icon: StreamSvgIcon.record(
+                        size: 40,
                         color: _getIconColor(3),
                       ),
                       onPressed: attachmentLimitCrossed ||
@@ -1450,7 +1462,9 @@ class MessageInputState extends State<MessageInput> {
   Widget _buildCommandButton(BuildContext context) {
     final s = textEditingController.text.trim();
     final defaultButton = IconButton(
+      iconSize: 35,
       icon: StreamSvgIcon.lightning(
+        size: 35,
         color: s.isNotEmpty
             ? _streamChatTheme.colorTheme.disabled
             : (_showCommandsOverlay
@@ -1459,10 +1473,10 @@ class MessageInputState extends State<MessageInput> {
       ),
       padding: const EdgeInsets.all(0),
       constraints: const BoxConstraints.tightFor(
-        height: 24,
-        width: 24,
+        height: 35,
+        width: 35,
       ),
-      splashRadius: 24,
+      splashRadius: 35,
       onPressed: () async {
         if (_openFilePickerSection) {
           setState(() => _openFilePickerSection = false);
@@ -1481,17 +1495,19 @@ class MessageInputState extends State<MessageInput> {
 
   Widget _buildAttachmentButton(BuildContext context) {
     final defaultButton = IconButton(
-      icon: StreamSvgIcon.attach(
+      iconSize: 40,
+      icon: StreamSvgIcon.camera(
+        size: 40,
         color: _openFilePickerSection
             ? _messageInputTheme.actionButtonColor
             : _messageInputTheme.actionButtonIdleColor,
       ),
       padding: const EdgeInsets.all(0),
       constraints: const BoxConstraints.tightFor(
-        height: 24,
-        width: 24,
+        height: 40,
+        width: 40,
       ),
-      splashRadius: 24,
+      splashRadius: 40,
       onPressed: () async {
         _showCommandsOverlay = false;
         _showMentionsOverlay = false;
@@ -1717,6 +1733,8 @@ class MessageInputState extends State<MessageInput> {
   Widget _buildIdleSendButton(BuildContext context) => Padding(
         padding: const EdgeInsets.all(8),
         child: StreamSvgIcon(
+          height: 40,
+          width: 40,
           assetName: _getIdleSendIcon(),
           color: _messageInputTheme.sendButtonIdleColor,
         ),
@@ -1725,14 +1743,17 @@ class MessageInputState extends State<MessageInput> {
   Widget _buildSendButton(BuildContext context) => Padding(
         padding: const EdgeInsets.all(8),
         child: IconButton(
+          iconSize: 40,
           onPressed: sendMessage,
           padding: const EdgeInsets.all(0),
-          splashRadius: 24,
+          splashRadius: 40,
           constraints: const BoxConstraints.tightFor(
-            height: 24,
-            width: 24,
+            height: 40,
+            width: 40,
           ),
           icon: StreamSvgIcon(
+            width: 40,
+            height: 40,
             assetName: _getSendIcon(),
             color: _messageInputTheme.sendButtonColor,
           ),

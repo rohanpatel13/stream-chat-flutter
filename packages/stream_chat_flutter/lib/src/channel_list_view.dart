@@ -295,79 +295,104 @@ class _ChannelListViewState extends State<ChannelListView> {
     );
   }
 
-  Widget _buildEmptyWidget(BuildContext context) => LayoutBuilder(
-    builder: (context, viewportConstraints) {
-      final chatThemeData = StreamChatTheme.of(context);
-      return SingleChildScrollView(
-        physics: const AlwaysScrollableScrollPhysics(),
-        child: Stack(
+  Widget _buildEmptyWidget(BuildContext context) =>
+      Container(
+        margin: EdgeInsets.fromLTRB(0, MediaQuery.of(context).size.height / 4.5, 0, 0),
+        child: Column(
           children: [
-            ConstrainedBox(
-              constraints: BoxConstraints(
-                minHeight: viewportConstraints.maxHeight,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // StreamSvgIcon.message(
-                  //   size: 136,
-                  //   color: chatThemeData.colorTheme.disabled,
-                  // ),
-                  StreamSvgIcon.message_new(
-                    size: 90,
-                  ),
-                  SizedBox(height: 22),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(75, 0, 75, 0),
-                    child: Text(
-                      context.translations.letsStartChattingLabel,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontFamily: 'Poppins',
-                          color: ColorAssets.colorgrey,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                          height: 1.5
-                      ),
-                    ),
-                  ),
-                  // Padding(
-                  //   padding: const EdgeInsets.symmetric(
-                  //     vertical: 8,
-                  //     horizontal: 52,
-                  //   ),
-                  //   child: Text(
-                  //     context.translations.sendingFirstMessageLabel,
-                  //     textAlign: TextAlign.center,
-                  //     style: chatThemeData.textTheme.body.copyWith(
-                  //       color: chatThemeData.colorTheme.textLowEmphasis,
-                  //     ),
-                  //   ),
-                  // ),
-                ],
+            StreamSvgIcon.message_new(
+              size: 90,
+            ),
+            const SizedBox(height: 22),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(75, 0, 75, 0),
+              child: Text(
+                'You can message your Mutual Crushes, so start Crushing!',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontFamily: 'Poppins',
+                    color: ColorAssets.colorgrey,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                    height: 1.5),
               ),
             ),
-            // Positioned(
-            //   right: 0,
-            //   left: 0,
-            //   bottom: 32,
-            //   child: Center(
-            //     child: TextButton(
-            //       onPressed: widget.onStartChatPressed,
-            //       child: Text(
-            //         context.translations.startAChatLabel,
-            //         style: chatThemeData.textTheme.bodyBold.copyWith(
-            //           color: chatThemeData.colorTheme.accentPrimary,
-            //         ),
-            //       ),
-            //     ),
-            //   ),
-            // ),
           ],
         ),
       );
-    },
-  );
+  //     LayoutBuilder(
+  //   builder: (context, viewportConstraints) {
+  //     final chatThemeData = StreamChatTheme.of(context);
+  //     return SingleChildScrollView(
+  //       physics: const AlwaysScrollableScrollPhysics(),
+  //       child: Stack(
+  //         children: [
+  //           ConstrainedBox(
+  //             constraints: BoxConstraints(
+  //               minHeight: viewportConstraints.maxHeight,
+  //             ),
+  //             child: Column(
+  //               mainAxisAlignment: MainAxisAlignment.center,
+  //               children: [
+  //                 // StreamSvgIcon.message(
+  //                 //   size: 136,
+  //                 //   color: chatThemeData.colorTheme.disabled,
+  //                 // ),
+  //                 StreamSvgIcon.message_new(
+  //                   size: 90,
+  //                 ),
+  //                 SizedBox(height: 22),
+  //                 Padding(
+  //                   padding: EdgeInsets.fromLTRB(75, 0, 75, 0),
+  //                   child: Text(
+  //                     context.translations.letsStartChattingLabel,
+  //                     textAlign: TextAlign.center,
+  //                     style: TextStyle(
+  //                         fontFamily: 'Poppins',
+  //                         color: ColorAssets.colorgrey,
+  //                         fontSize: 15,
+  //                         fontWeight: FontWeight.w600,
+  //                         height: 1.5
+  //                     ),
+  //                   ),
+  //                 ),
+  //                 // Padding(
+  //                 //   padding: const EdgeInsets.symmetric(
+  //                 //     vertical: 8,
+  //                 //     horizontal: 52,
+  //                 //   ),
+  //                 //   child: Text(
+  //                 //     context.translations.sendingFirstMessageLabel,
+  //                 //     textAlign: TextAlign.center,
+  //                 //     style: chatThemeData.textTheme.body.copyWith(
+  //                 //       color: chatThemeData.colorTheme.textLowEmphasis,
+  //                 //     ),
+  //                 //   ),
+  //                 // ),
+  //               ],
+  //             ),
+  //           ),
+  //           // Positioned(
+  //           //   right: 0,
+  //           //   left: 0,
+  //           //   bottom: 32,
+  //           //   child: Center(
+  //           //     child: TextButton(
+  //           //       onPressed: widget.onStartChatPressed,
+  //           //       child: Text(
+  //           //         context.translations.startAChatLabel,
+  //           //         style: chatThemeData.textTheme.bodyBold.copyWith(
+  //           //           color: chatThemeData.colorTheme.accentPrimary,
+  //           //         ),
+  //           //       ),
+  //           //     ),
+  //           //   ),
+  //           // ),
+  //         ],
+  //       ),
+  //     );
+  //   },
+  // );
 
   Widget _buildLoadingWidget(BuildContext context) => ListView(
     padding: widget.padding,
@@ -709,12 +734,13 @@ class _ChannelListViewState extends State<ChannelListView> {
         },
         builder: (context, showLoading) {
           if (!showLoading) return const Offstage();
-          return const Center(
-            child: Padding(
-              padding: EdgeInsets.all(16),
-              child: CircularProgressIndicator(),
-            ),
-          );
+          // return const Center(
+          //   child: Padding(
+          //     padding: EdgeInsets.all(16),
+          //     child: CircularProgressIndicator(),
+          //   ),
+          // );
+          return Container();
         },
       );
 

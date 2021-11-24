@@ -91,8 +91,9 @@ class _GalleryFooterState extends State<GalleryFooter> {
                 )
               else
                 IconButton(
+                  iconSize: 40,
                   icon: StreamSvgIcon.iconShare(
-                    size: 24,
+                    size: 40,
                     color: galleryFooterThemeData.shareIconColor,
                   ),
                   onPressed: () async {
@@ -139,7 +140,9 @@ class _GalleryFooterState extends State<GalleryFooter> {
                 ),
               ),
               IconButton(
+                iconSize: 40,
                 icon: StreamSvgIcon.iconGrid(
+                  size: 40,
                   color: galleryFooterThemeData.gridIconButtonColor,
                 ),
                 onPressed: () => _showPhotosModal(context),
