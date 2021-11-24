@@ -205,6 +205,8 @@ class MessageInput extends StatefulWidget {
     this.commandButtonBuilder,
     this.customOverlays = const [],
     this.mentionAllAppUsers = false,
+    this.sendMessageIcon,
+    this.sendMessageIconIdle
   })  : assert(
           initialMessage == null || editMessage == null,
           "Can't provide both `initialMessage` and `editMessage`",
@@ -322,6 +324,13 @@ class MessageInput extends StatefulWidget {
   ///
   /// Defaults to false.
   final bool mentionAllAppUsers;
+
+  /// Send Icon
+  final Widget? sendMessageIcon;
+
+  /// Send Icon idle
+  final Widget? sendMessageIconIdle;
+
 
   @override
   MessageInputState createState() => MessageInputState();
@@ -611,15 +620,15 @@ class MessageInputState extends State<MessageInput> {
 
   Widget _buildExpandActionsButton(BuildContext context) {
     final channel = StreamChannel.of(context).channel;
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
-      child: AnimatedCrossFade(
-        crossFadeState: _actionsShrunk
-            ? CrossFadeState.showFirst
-            : CrossFadeState.showSecond,
-        firstCurve: Curves.easeOut,
-        secondCurve: Curves.easeIn,
-        firstChild: IconButton(
+    return AnimatedCrossFade(
+      crossFadeState: _actionsShrunk
+          ? CrossFadeState.showFirst
+          : CrossFadeState.showSecond,
+      firstCurve: Curves.easeOut,
+      secondCurve: Curves.easeIn,
+      firstChild: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        child: IconButton(
           iconSize: 35,
           onPressed: () {
             if (_actionsShrunk) {
@@ -643,11 +652,14 @@ class MessageInputState extends State<MessageInput> {
           ),
           splashRadius: 35,
         ),
-        secondChild: widget.disableAttachments &&
-                !widget.showCommandsButton &&
-                !widget.actions.isNotEmpty
-            ? const Offstage()
-            : Wrap(
+      ),
+      secondChild: widget.disableAttachments &&
+              !widget.showCommandsButton &&
+              !widget.actions.isNotEmpty
+          ? const Offstage()
+          : Padding(
+            padding: const EdgeInsets.only(left: 6),
+            child: Wrap(
                 children: <Widget>[
                   if (!widget.disableAttachments)
                     _buildAttachmentButton(context),
@@ -657,11 +669,12 @@ class MessageInputState extends State<MessageInput> {
                       channel.config?.commands.isNotEmpty == true)
                     _buildCommandButton(context),
                   ...widget.actions,
-                ].insertBetween(const SizedBox(width: 8)),
+                  ],
+                // ].insertBetween(const SizedBox(width: 8)),
               ),
-        duration: const Duration(milliseconds: 300),
-        alignment: Alignment.center,
-      ),
+          ),
+      duration: const Duration(milliseconds: 300),
+      alignment: Alignment.center,
     );
   }
 
@@ -714,6 +727,9 @@ class MessageInputState extends State<MessageInput> {
                     textAlignVertical: TextAlignVertical.center,
                     decoration: _getInputDecoration(context),
                     textCapitalization: TextCapitalization.sentences,
+                    onTap: (){
+                      _focusNode.requestFocus();
+                    },
                   ),
                 ),
               ],
@@ -778,7 +794,7 @@ class MessageInputState extends State<MessageInput> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         StreamSvgIcon.lightning(
-                          color: Colors.white,
+                          color: _streamChatTheme.colorTheme.accentPrimary,
                           size: 16,
                         ),
                         Text(
@@ -1032,6 +1048,12 @@ class MessageInputState extends State<MessageInput> {
                           !_attachmentContainsFile && _attachments.isNotEmpty
                               ? null
                               : () {
+                                  _focusNode.unfocus();
+                                  if (_openFilePickerSection) {
+                                    setState(() {
+                                      _openFilePickerSection = false;
+                                    });
+                                  }
                                   pickFile(DefaultAttachmentTypes.file);
                                 },
                     ),
@@ -1046,6 +1068,12 @@ class MessageInputState extends State<MessageInput> {
                                   _attachments.isNotEmpty)
                           ? null
                           : () {
+                        _focusNode.unfocus();
+                        if (_openFilePickerSection) {
+                          setState(() {
+                            _openFilePickerSection = false;
+                          });
+                        }
                               pickFile(
                                 DefaultAttachmentTypes.image,
                                 camera: true,
@@ -1064,6 +1092,12 @@ class MessageInputState extends State<MessageInput> {
                                   _attachments.isNotEmpty)
                           ? null
                           : () {
+                        _focusNode.unfocus();
+                        if (_openFilePickerSection) {
+                          setState(() {
+                            _openFilePickerSection = false;
+                          });
+                        }
                               pickFile(
                                 DefaultAttachmentTypes.video,
                                 camera: true,
@@ -1731,8 +1765,8 @@ class MessageInputState extends State<MessageInput> {
   }
 
   Widget _buildIdleSendButton(BuildContext context) => Padding(
-        padding: const EdgeInsets.all(8),
-        child: StreamSvgIcon(
+        padding: const EdgeInsets.only(right: 4),
+        child: widget.sendMessageIconIdle ?? StreamSvgIcon(
           height: 40,
           width: 40,
           assetName: _getIdleSendIcon(),
@@ -1741,7 +1775,7 @@ class MessageInputState extends State<MessageInput> {
       );
 
   Widget _buildSendButton(BuildContext context) => Padding(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.only(right: 8),
         child: IconButton(
           iconSize: 40,
           onPressed: sendMessage,
@@ -1751,7 +1785,7 @@ class MessageInputState extends State<MessageInput> {
             height: 40,
             width: 40,
           ),
-          icon: StreamSvgIcon(
+          icon: widget.sendMessageIcon ?? StreamSvgIcon(
             width: 40,
             height: 40,
             assetName: _getSendIcon(),
@@ -1786,6 +1820,16 @@ class MessageInputState extends State<MessageInput> {
     }
 
     final shouldUnfocus = _commandEnabled;
+
+    if(_commandEnabled){
+      _focusNode.unfocus();
+      if (_openFilePickerSection) {
+        setState(() {
+          _openFilePickerSection = false;
+        });
+      }
+    }
+
 
     if (_commandEnabled) {
       text = '${'/${_chosenCommand!.name} '}$text';
@@ -1848,9 +1892,9 @@ class MessageInputState extends State<MessageInput> {
         sendingFuture = channel.updateMessage(message);
       }
 
-      if (!shouldUnfocus) {
-        FocusScope.of(context).requestFocus(_focusNode);
-      }
+      // if (!shouldUnfocus) {
+      //   FocusScope.of(context).requestFocus(_focusNode);
+      // }
 
       final resp = await sendingFuture;
       if (resp.message?.type == 'error') {
