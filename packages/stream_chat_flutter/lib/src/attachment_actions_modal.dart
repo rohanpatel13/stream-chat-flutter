@@ -7,6 +7,7 @@ import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:stream_chat_flutter/src/extension.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
+import 'package:stream_chat_flutter/utils/color_asset.dart';
 
 /// Callback to download an attachment asset
 typedef AttachmentDownloader = Future<String> Function(
@@ -274,8 +275,11 @@ class AttachmentActionsModal extends StatelessWidget {
                                 CircularProgressIndicator(
                                   value: progress.toProgressIndicatorValue,
                                   strokeWidth: 8,
-                                  valueColor: AlwaysStoppedAnimation(
-                                    theme.colorTheme.accentPrimary,
+                                  // valueColor: AlwaysStoppedAnimation(
+                                  //   theme.colorTheme.accentPrimary,
+                                  // ),
+                                      valueColor: AlwaysStoppedAnimation(
+                                   ColorAssets.colorRazz,
                                   ),
                                 ),
                                 Center(

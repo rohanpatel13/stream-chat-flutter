@@ -311,7 +311,7 @@ class _ChannelListViewState extends State<ChannelListView> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontFamily: 'Poppins',
-                    color: ColorAssets.colorgrey,
+                    color: ColorAssets.colorGrey,
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
                     height: 1.5),

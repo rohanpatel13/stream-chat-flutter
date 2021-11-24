@@ -5,6 +5,7 @@ import 'package:stream_chat_flutter/src/attachment/attachment_widget.dart';
 import 'package:stream_chat_flutter/src/extension.dart';
 import 'package:stream_chat_flutter/src/visible_footnote.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
+import 'package:stream_chat_flutter/utils/color_asset.dart';
 import 'package:stream_chat_flutter_core/stream_chat_flutter_core.dart';
 
 /// Widget for showing a GIF attachment
@@ -211,9 +212,10 @@ class GiphyAttachment extends AttachmentWidget {
                         child: Text(
                           context.translations.sendLabel,
                           style: TextStyle(
-                            color: StreamChatTheme.of(context)
-                                .colorTheme
-                                .accentPrimary,
+                            // color: StreamChatTheme.of(context)
+                            //     .colorTheme
+                            //     .accentPrimary,
+                            color: ColorAssets.colorRazz,
                             fontWeight: FontWeight.bold,
                           ),
                         ),

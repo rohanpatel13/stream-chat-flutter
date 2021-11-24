@@ -8,6 +8,7 @@ import 'package:stream_chat_flutter/src/stream_svg_icon.dart';
 import 'package:stream_chat_flutter/src/upload_progress_indicator.dart';
 import 'package:stream_chat_flutter/src/utils.dart';
 import 'package:stream_chat_flutter/src/video_thumbnail_image.dart';
+import 'package:stream_chat_flutter/utils/color_asset.dart';
 import 'package:stream_chat_flutter_core/stream_chat_flutter_core.dart';
 
 /// Widget for displaying file attachments
@@ -232,7 +233,8 @@ class FileAttachment extends AttachmentWidget {
       success: () => Padding(
         padding: const EdgeInsets.all(8),
         child: CircleAvatar(
-          backgroundColor: theme.colorTheme.accentPrimary,
+          // backgroundColor: theme.colorTheme.accentPrimary,
+          backgroundColor: ColorAssets.colorRazz,
           maxRadius: 12,
           child: StreamSvgIcon.check(color: theme.colorTheme.barsBg),
         ),
@@ -284,7 +286,8 @@ class FileAttachment extends AttachmentWidget {
         showBackground: false,
         padding: EdgeInsets.zero,
         textStyle: textStyle,
-        progressIndicatorColor: theme.colorTheme.accentPrimary,
+        // progressIndicatorColor: theme.colorTheme.accentPrimary,
+        progressIndicatorColor: ColorAssets.colorRazz,
       ),
       success: () => Text(fileSize(size), style: textStyle),
       failed: (_) => Text(

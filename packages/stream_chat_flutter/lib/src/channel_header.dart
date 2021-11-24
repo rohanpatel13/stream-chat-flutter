@@ -174,23 +174,47 @@ class ChannelHeader extends StatelessWidget implements PreferredSizeWidget {
               child: SizedBox(
                 height: preferredSize.height,
                 width: preferredSize.width,
-                child: Column(
+                // child:
+                // Column(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: <Widget>[
+                //     title ??
+                //         ChannelName(
+                //           textStyle: channelHeaderTheme.titleStyle!.copyWith(
+                //               fontSize: ScreenUtil().setSp(16.0),
+                //               fontFamily: 'Poppins'
+                //           ),
+                //         ),
+                //     const SizedBox(height: 2),
+                //     subtitle ??
+                //         ChannelInfo(
+                //           showTypingIndicator: showTypingIndicator,
+                //           channel: channel,
+                //           textStyle: channelHeaderTheme.subtitleStyle,
+                //         ),
+                //   ],
+                // ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    title ??
-                        ChannelName(
-                          textStyle: channelHeaderTheme.titleStyle!.copyWith(
-                              fontSize: ScreenUtil().setSp(16.0),
-                              fontFamily: 'Poppins'
-                          ),
+                    Center(
+                      child: ChannelAvatar(
+                        borderRadius:
+                        channelHeaderTheme.avatarTheme?.borderRadius,
+                        constraints:
+                        channelHeaderTheme.avatarTheme?.constraints,
+                        onTap: onImageTap,
+                      ),
+                    ),
+                    const SizedBox(width: 6),
+                    title ?? ChannelName(
+                        textStyle: channelHeaderTheme.titleStyle!.copyWith(
+                            fontSize: ScreenUtil().setSp(16.0),
+                            fontFamily: 'Poppins'
                         ),
-                    const SizedBox(height: 2),
-                    subtitle ??
-                        ChannelInfo(
-                          showTypingIndicator: showTypingIndicator,
-                          channel: channel,
-                          textStyle: channelHeaderTheme.subtitleStyle,
-                        ),
+                      ),
+
                   ],
                 ),
               ),
