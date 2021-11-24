@@ -170,7 +170,7 @@ class MessageListView extends StatefulWidget {
     this.messageListController,
     this.reverse = true,
     this.paginationLimit = 20,
-    this.paginationLoadingIndicatorBuilder,
+    this.paginationLoadingIndicatorBuilder, this.sendIconButton,
   }) : super(key: key);
 
   /// Function used to build a custom message widget
@@ -288,6 +288,9 @@ class MessageListView extends StatefulWidget {
 
   /// Builder used to build the loading indicator shown while paginating.
   final WidgetBuilder? paginationLoadingIndicatorBuilder;
+
+  /// Send Icon botton
+  final Widget? sendIconButton;
 
   @override
   _MessageListViewState createState() => _MessageListViewState();
@@ -922,6 +925,7 @@ class _MessageListViewState extends State<MessageListView> {
       showDeleteMessage: false,
       showEditMessage: false,
       message: message,
+      sendIconButton: widget.sendIconButton,
       reverse: isMyMessage,
       showUsername: !isMyMessage,
       padding: const EdgeInsets.all(8),
@@ -1060,6 +1064,7 @@ class _MessageListViewState extends State<MessageListView> {
     Widget messageWidget = MessageWidget(
       message: message,
       reverse: isMyMessage,
+      sendIconButton: widget.sendIconButton,
       showReactions: !message.isDeleted,
       padding: const EdgeInsets.symmetric(horizontal: 8),
       showInChannelIndicator: showInChannelIndicator,

@@ -94,25 +94,28 @@ class ChannelAvatar extends StatelessWidget {
       stream: channel.imageStream,
       initialData: channel.image,
       builder: (context, channelImage) {
-        Widget child = ClipRRect(
-          borderRadius: borderRadius ?? previewTheme?.borderRadius,
-          child: Container(
-            constraints: constraints ?? previewTheme?.constraints,
-            decoration: BoxDecoration(color: colorTheme.accentPrimary),
-            child: InkWell(
-              onTap: onTap,
-              child: CachedNetworkImage(
-                imageUrl: channelImage,
-                errorWidget: (_, __, ___) => Center(
-                  child: Text(
-                    channel.name?[0] ?? '',
-                    style: TextStyle(
-                      color: colorTheme.barsBg,
-                      fontWeight: FontWeight.bold,
+        Widget child = FittedBox(
+          fit: BoxFit.cover,
+          child: ClipRRect(
+            borderRadius: borderRadius ?? previewTheme?.borderRadius,
+            child: Container(
+              constraints: constraints ?? previewTheme?.constraints,
+              decoration: BoxDecoration(color: colorTheme.accentPrimary),
+              child: InkWell(
+                onTap: onTap,
+                child: CachedNetworkImage(
+                  imageUrl: channelImage,
+                  errorWidget: (_, __, ___) => Center(
+                    child: Text(
+                      channel.name?[0] ?? '',
+                      style: TextStyle(
+                        color: colorTheme.barsBg,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
+                  fit: BoxFit.cover,
                 ),
-                fit: BoxFit.cover,
               ),
             ),
           ),

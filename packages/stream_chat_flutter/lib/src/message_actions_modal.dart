@@ -32,7 +32,7 @@ class MessageActionsModal extends StatefulWidget {
     this.editMessageInputBuilder,
     this.reverse = false,
     this.customActions = const [],
-    this.onCopyTap,
+    this.onCopyTap, this.sendMessageIcon,
   }) : super(key: key);
 
   /// Widget that shows the message
@@ -88,6 +88,9 @@ class MessageActionsModal extends StatefulWidget {
 
   /// List of custom actions
   final List<MessageAction> customActions;
+
+  /// Send Message icon
+  final Widget? sendMessageIcon;
 
   @override
   _MessageActionsModalState createState() => _MessageActionsModalState();
@@ -591,7 +594,7 @@ class _MessageActionsModalState extends State<MessageActionsModal> {
                     Padding(
                       padding: const EdgeInsets.all(8),
                       child: StreamSvgIcon.edit(
-                        color: streamChatThemeData.colorTheme.disabled,
+                        color: streamChatThemeData.colorTheme.accentPrimary,
                       ),
                     ),
                     Text(
@@ -616,6 +619,7 @@ class _MessageActionsModalState extends State<MessageActionsModal> {
                     Navigator.pop(context);
                     return m;
                   },
+                  sendMessageIcon:widget.sendMessageIcon ,
                 ),
             ],
           ),

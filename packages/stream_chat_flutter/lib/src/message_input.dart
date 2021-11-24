@@ -612,9 +612,8 @@ class MessageInputState extends State<MessageInput> {
           : _buildSendButton(context);
     }
 
-    return AnimatedSwitcher(
-      duration: _streamChatTheme.messageInputTheme.sendAnimationDuration!,
-      child: sendButton,
+    return Container(
+      child: (_messageIsPresent || _attachments.isNotEmpty)?sendButton:widget.idleSendButton ?? _buildIdleSendButton(context),
     );
   }
 
