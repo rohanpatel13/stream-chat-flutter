@@ -16,9 +16,9 @@ class StreamChatTheme extends InheritedWidget {
     required this.data,
     required Widget child,
   }) : super(
-          key: key,
-          child: child,
-        );
+    key: key,
+    child: child,
+  );
 
   /// Theme data
   final StreamChatThemeData data;
@@ -29,11 +29,11 @@ class StreamChatTheme extends InheritedWidget {
   /// Use this method to get the current [StreamChatThemeData] instance
   static StreamChatThemeData of(BuildContext context) {
     final streamChatTheme =
-        context.dependOnInheritedWidgetOfExactType<StreamChatTheme>();
+    context.dependOnInheritedWidgetOfExactType<StreamChatTheme>();
 
     assert(
-      streamChatTheme != null,
-      'You must have a StreamChatTheme widget at the top of your widget tree',
+    streamChatTheme != null,
+    'You must have a StreamChatTheme widget at the top of your widget tree',
     );
 
     return streamChatTheme!.data;
@@ -140,12 +140,12 @@ class StreamChatThemeData {
 
   /// Create theme from color and text theme
   factory StreamChatThemeData.fromColorAndTextTheme(
-    ColorTheme colorTheme,
-    TextTheme textTheme,
-  ) {
+      ColorTheme colorTheme,
+      TextTheme textTheme,
+      ) {
     final accentColor = colorTheme.accentPrimary;
     final iconTheme =
-        IconThemeData(color: colorTheme.textHighEmphasis.withOpacity(0.5));
+    IconThemeData(color: colorTheme.textHighEmphasis.withOpacity(0.5));
     final channelHeaderTheme = ChannelHeaderThemeData(
       avatarTheme: AvatarThemeData(
         borderRadius: BorderRadius.circular(20),
@@ -203,16 +203,16 @@ class StreamChatThemeData {
       channelHeaderTheme: channelHeaderTheme,
       ownMessageTheme: MessageThemeData(
         messageAuthorStyle:
-            textTheme.footnote.copyWith(color: colorTheme.textLowEmphasis),
-        messageTextStyle: textTheme.body,
+        textTheme.footnote.copyWith(color: colorTheme.textLowEmphasis),
+        messageTextStyle: textTheme.body.copyWith(color: Colors.white),
         createdAtStyle:
-            textTheme.footnote.copyWith(color: colorTheme.textLowEmphasis),
+        textTheme.footnote.copyWith(color: colorTheme.textLowEmphasis),
         repliesStyle: textTheme.footnoteBold.copyWith(color: accentColor),
-        messageBackgroundColor: colorTheme.disabled,
+        messageBackgroundColor: accentColor,
         reactionsBackgroundColor: colorTheme.barsBg,
         reactionsBorderColor: colorTheme.borders,
         reactionsMaskColor: colorTheme.appBg,
-        messageBorderColor: colorTheme.disabled,
+        messageBorderColor: colorTheme.textHighEmphasis,
         avatarTheme: AvatarThemeData(
           borderRadius: BorderRadius.circular(20),
           constraints: const BoxConstraints.tightFor(
@@ -221,7 +221,7 @@ class StreamChatThemeData {
           ),
         ),
         messageLinksStyle: TextStyle(
-          color: accentColor,
+          color:  Color(0xff005FFF),
         ),
         linkBackgroundColor: colorTheme.linkBg,
       ),
@@ -231,9 +231,9 @@ class StreamChatThemeData {
         reactionsMaskColor: colorTheme.appBg,
         messageTextStyle: textTheme.body,
         createdAtStyle:
-            textTheme.footnote.copyWith(color: colorTheme.textLowEmphasis),
+        textTheme.footnote.copyWith(color: colorTheme.textLowEmphasis),
         messageAuthorStyle:
-            textTheme.footnote.copyWith(color: colorTheme.textLowEmphasis),
+        textTheme.footnote.copyWith(color: colorTheme.textLowEmphasis),
         repliesStyle: textTheme.footnoteBold.copyWith(color: accentColor),
         messageLinksStyle: TextStyle(
           color: accentColor,
@@ -447,14 +447,14 @@ class StreamChatThemeData {
   }) =>
       StreamChatThemeData.raw(
         channelListHeaderTheme:
-            this.channelListHeaderTheme.merge(channelListHeaderTheme),
+        this.channelListHeaderTheme.merge(channelListHeaderTheme),
         textTheme: this.textTheme.merge(textTheme),
         colorTheme: this.colorTheme.merge(colorTheme),
         primaryIconTheme: this.primaryIconTheme.merge(primaryIconTheme),
         defaultUserImage: defaultUserImage ?? this.defaultUserImage,
         placeholderUserImage: placeholderUserImage ?? this.placeholderUserImage,
         channelPreviewTheme:
-            this.channelPreviewTheme.merge(channelPreviewTheme),
+        this.channelPreviewTheme.merge(channelPreviewTheme),
         channelHeaderTheme: this.channelHeaderTheme.merge(channelHeaderTheme),
         ownMessageTheme: this.ownMessageTheme.merge(ownMessageTheme),
         otherMessageTheme: this.otherMessageTheme.merge(otherMessageTheme),
@@ -466,7 +466,7 @@ class StreamChatThemeData {
         channelListViewTheme: channelListViewTheme ?? this.channelListViewTheme,
         userListViewTheme: userListViewTheme ?? this.userListViewTheme,
         messageSearchListViewTheme:
-            messageSearchListViewTheme ?? this.messageSearchListViewTheme,
+        messageSearchListViewTheme ?? this.messageSearchListViewTheme,
       );
 
   /// Merge themes
@@ -474,7 +474,7 @@ class StreamChatThemeData {
     if (other == null) return this;
     return copyWith(
       channelListHeaderTheme:
-          channelListHeaderTheme.merge(other.channelListHeaderTheme),
+      channelListHeaderTheme.merge(other.channelListHeaderTheme),
       textTheme: textTheme.merge(other.textTheme),
       colorTheme: colorTheme.merge(other.colorTheme),
       primaryIconTheme: other.primaryIconTheme,
@@ -489,12 +489,12 @@ class StreamChatThemeData {
       galleryHeaderTheme: galleryHeaderTheme.merge(other.galleryHeaderTheme),
       galleryFooterTheme: galleryFooterTheme.merge(other.galleryFooterTheme),
       messageListViewTheme:
-          messageListViewTheme.merge(other.messageListViewTheme),
+      messageListViewTheme.merge(other.messageListViewTheme),
       channelListViewTheme:
-          channelListViewTheme.merge(other.channelListViewTheme),
+      channelListViewTheme.merge(other.channelListViewTheme),
       userListViewTheme: userListViewTheme.merge(other.userListViewTheme),
       messageSearchListViewTheme:
-          messageSearchListViewTheme.merge(other.messageSearchListViewTheme),
+      messageSearchListViewTheme.merge(other.messageSearchListViewTheme),
     );
   }
 }

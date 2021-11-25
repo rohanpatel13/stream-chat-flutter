@@ -121,11 +121,11 @@ class MessageWidget extends StatefulWidget {
             final mediaQueryData = MediaQuery.of(context);
             if (attachments.length > 1) {
               return Padding(
-                padding: attachmentPadding,
+                padding: EdgeInsets.zero,
                 child: wrapAttachmentWidget(
                   context,
                   Material(
-                    color: messageTheme.messageBackgroundColor,
+                    color:Colors.white,
                     child: ImageGroup(
                       size: Size(
                         mediaQueryData.size.width * 0.8,
@@ -585,6 +585,12 @@ class _MessageWidgetState extends State<MessageWidget>
 
   bool get isGiphy =>
       widget.message.attachments.any((element) => element.type == 'giphy');
+
+  bool get isImage =>
+      widget.message.attachments.any((element) => element.type == 'image');
+
+  bool get isVideo =>
+      widget.message.attachments.any((element) => element.type == 'video');
 
   bool get isOnlyEmoji => widget.message.text?.isOnlyEmoji == true;
 
@@ -1386,6 +1392,14 @@ class _MessageWidgetState extends State<MessageWidget>
     }
 
     if (isGiphy) {
+      return Colors.transparent;
+    }
+
+    if (isImage && widget.message.text!.trim().isEmpty) {
+      return Colors.transparent;
+    }
+
+    if (isVideo && widget.message.text!.trim().isEmpty) {
       return Colors.transparent;
     }
 

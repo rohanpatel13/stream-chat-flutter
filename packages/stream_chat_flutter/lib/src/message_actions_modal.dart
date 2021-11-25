@@ -35,6 +35,7 @@ class MessageActionsModal extends StatefulWidget {
     this.onCopyTap,
     this.sendMessageIcon,
     this.sendMessageIconIdle,
+    this.borderRadiusGeometry,
   }) : super(key: key);
 
   /// Widget that shows the message
@@ -96,6 +97,9 @@ class MessageActionsModal extends StatefulWidget {
 
   /// Send idle Message icon
   final Widget? sendMessageIconIdle;
+
+  final BorderRadius? borderRadiusGeometry;
+
 
   @override
   _MessageActionsModalState createState() => _MessageActionsModalState();
