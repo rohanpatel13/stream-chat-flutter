@@ -13,7 +13,7 @@ class ChannelName extends StatelessWidget {
   const ChannelName({
     Key? key,
     this.textStyle,
-    this.textOverflow = TextOverflow.ellipsis, this.calledFromChannelHeader,
+    this.textOverflow = TextOverflow.ellipsis,
   }) : super(key: key);
 
   /// The style of the text displayed
@@ -21,9 +21,6 @@ class ChannelName extends StatelessWidget {
 
   /// How visual overflow should be handled.
   final TextOverflow textOverflow;
-
-  final bool? calledFromChannelHeader;
-
 
   @override
   Widget build(BuildContext context) {

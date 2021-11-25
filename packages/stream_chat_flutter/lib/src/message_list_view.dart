@@ -170,7 +170,9 @@ class MessageListView extends StatefulWidget {
     this.messageListController,
     this.reverse = true,
     this.paginationLimit = 20,
-    this.paginationLoadingIndicatorBuilder, this.sendIconButton,
+    this.paginationLoadingIndicatorBuilder,
+    this.sendIconButton,
+    this.sendIconButtonIdle,
   }) : super(key: key);
 
   /// Function used to build a custom message widget
@@ -292,6 +294,9 @@ class MessageListView extends StatefulWidget {
   /// Send Icon botton
   final Widget? sendIconButton;
 
+  /// Send Icon botton Idle
+  final Widget? sendIconButtonIdle;
+
   @override
   _MessageListViewState createState() => _MessageListViewState();
 }
@@ -361,7 +366,7 @@ class _MessageListViewState extends State<MessageListView> {
         messageFilter: widget.messageFilter,
         loadingBuilder: widget.loadingBuilder ??
             (context) => const Center(
-                  child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator(color:Color(0xFFE31469)),
                 ),
         emptyBuilder: widget.emptyBuilder ??
             (context) => Center(
@@ -926,6 +931,7 @@ class _MessageListViewState extends State<MessageListView> {
       showEditMessage: false,
       message: message,
       sendIconButton: widget.sendIconButton,
+      sendIconButtonIdle: widget.sendIconButtonIdle,
       reverse: isMyMessage,
       showUsername: !isMyMessage,
       padding: const EdgeInsets.all(8),
@@ -1065,6 +1071,7 @@ class _MessageListViewState extends State<MessageListView> {
       message: message,
       reverse: isMyMessage,
       sendIconButton: widget.sendIconButton,
+      sendIconButtonIdle: widget.sendIconButtonIdle,
       showReactions: !message.isDeleted,
       padding: const EdgeInsets.symmetric(horizontal: 8),
       showInChannelIndicator: showInChannelIndicator,
@@ -1361,7 +1368,7 @@ class _LoadingIndicator extends StatelessWidget {
             const Center(
               child: Padding(
                 padding: EdgeInsets.all(8),
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(color:Color(0xFFE31469)),
               ),
             );
       },

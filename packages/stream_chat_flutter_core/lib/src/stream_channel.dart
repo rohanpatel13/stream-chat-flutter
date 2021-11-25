@@ -389,7 +389,7 @@ class StreamChannelState extends State<StreamChannel> {
         final dataLoaded = initialMessageId == null ? true : snapshot.data![1];
         if (widget.showLoading && (!initialized || !dataLoaded)) {
           return const Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(color:Color(0xFFE31469)),
           );
         }
         return widget.child;

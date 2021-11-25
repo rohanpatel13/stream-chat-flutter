@@ -1,16 +1,13 @@
-import 'package:collection/collection.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:stream_chat_flutter/src/channel_bottom_sheet.dart';
 import 'package:stream_chat_flutter/src/extension.dart';
 import 'package:stream_chat_flutter/src/stream_svg_icon.dart';
 import 'package:stream_chat_flutter/src/theme/themes.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 import 'package:stream_chat_flutter/utils/color_asset.dart';
-import 'package:stream_chat_flutter/utils/image_assets.dart';
 import 'package:stream_chat_flutter_core/stream_chat_flutter_core.dart';
 
 
@@ -244,6 +241,7 @@ class _ChannelListViewState extends State<ChannelListView> {
 
     if (widget.pullToRefresh) {
       child = RefreshIndicator(
+        color: StreamChatTheme.of(context).colorTheme.accentPrimary,
         onRefresh: () => _channelListController.loadData!(),
         child: child,
       );
@@ -660,7 +658,7 @@ class _ChannelListViewState extends State<ChannelListView> {
         }
         Navigator.push(
           context,
-          MaterialPageRoute(
+          CupertinoPageRoute(
             builder: (context) => StreamChannel(
               channel: client,
               child: widget.channelWidget!,

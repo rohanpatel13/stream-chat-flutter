@@ -32,7 +32,9 @@ class MessageActionsModal extends StatefulWidget {
     this.editMessageInputBuilder,
     this.reverse = false,
     this.customActions = const [],
-    this.onCopyTap, this.sendMessageIcon,
+    this.onCopyTap,
+    this.sendMessageIcon,
+    this.sendMessageIconIdle,
   }) : super(key: key);
 
   /// Widget that shows the message
@@ -91,6 +93,9 @@ class MessageActionsModal extends StatefulWidget {
 
   /// Send Message icon
   final Widget? sendMessageIcon;
+
+  /// Send idle Message icon
+  final Widget? sendMessageIconIdle;
 
   @override
   _MessageActionsModalState createState() => _MessageActionsModalState();
@@ -619,7 +624,8 @@ class _MessageActionsModalState extends State<MessageActionsModal> {
                     Navigator.pop(context);
                     return m;
                   },
-                  sendMessageIcon:widget.sendMessageIcon ,
+                  sendMessageIcon:widget.sendMessageIcon,
+                  sendMessageIconIdle: widget.sendMessageIconIdle,
                 ),
             ],
           ),

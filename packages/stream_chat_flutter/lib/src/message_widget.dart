@@ -109,7 +109,9 @@ class MessageWidget extends StatefulWidget {
     this.onQuotedMessageTap,
     this.customActions = const [],
     this.onAttachmentTap,
-    this.usernameBuilder, this.sendIconButton,
+    this.usernameBuilder,
+    this.sendIconButton,
+    this.sendIconButtonIdle,
   })  : attachmentBuilders = {
           'image': (context, message, attachments) {
             final border = RoundedRectangleBorder(
@@ -428,6 +430,8 @@ class MessageWidget extends StatefulWidget {
   /// Send Icon botton
   final Widget? sendIconButton;
 
+  /// Send icon button idle
+  final Widget? sendIconButtonIdle;
 
   /// Creates a copy of [MessageWidget] with specified attributes overridden.
   MessageWidget copyWith({
@@ -1091,6 +1095,7 @@ class _MessageWidgetState extends State<MessageWidget>
         channel: channel,
         child: MessageActionsModal(
           sendMessageIcon: widget.sendIconButton,
+          sendMessageIconIdle: widget.sendIconButtonIdle,
           messageWidget: widget.copyWith(
             key: const Key('MessageWidget'),
             message: widget.message.copyWith(
