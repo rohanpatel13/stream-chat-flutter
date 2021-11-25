@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_is_empty
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -266,6 +268,12 @@ class _ChannelListViewState extends State<ChannelListView> {
 
   Widget _buildListView(BuildContext context, List<Channel> channels) {
 
+    // ignore: parameter_assignments
+    channels = channels.map((channel) => channel.state!.channelState.
+    messages != null && channel.state!.channelState.
+    messages.length != 0 ? channel : null).cast<Channel>().toList();
+    // ignore: unnecessary_null_comparison, cascade_invocations
+    channels.removeWhere((element) => element==null);
     if (widget.crossAxisCount > 1) {
       return GridView.builder(
         padding: widget.padding,
