@@ -1006,6 +1006,11 @@ class StreamSvgIcon extends StatelessWidget {
       width: width,
       height: height,
       color: color,
+      semanticsLabel: assetName == "Icon_camera.svg"
+          ? "Icon_camera"
+          : assetName == "Icon_lightning-command runner.svg"
+          ? "Icon_giphy"
+          : null,
     );
   }
 }

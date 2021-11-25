@@ -71,15 +71,15 @@ class MentionTile extends StatelessWidget {
                   const SizedBox(
                     height: 2,
                   ),
-                  subtitle ??
-                      Text(
-                        '@${member.userId}',
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: chatThemeData.textTheme.footnoteBold.copyWith(
-                          color: chatThemeData.colorTheme.textLowEmphasis,
-                        ),
-                      ),
+                  // subtitle ??
+                  //     Text(
+                  //       '@${member.userId}',
+                  //       maxLines: 1,
+                  //       overflow: TextOverflow.ellipsis,
+                  //       style: chatThemeData.textTheme.footnoteBold.copyWith(
+                  //         color: chatThemeData.colorTheme.textLowEmphasis,
+                  //       ),
+                  //     ),
                 ],
               ),
             ),

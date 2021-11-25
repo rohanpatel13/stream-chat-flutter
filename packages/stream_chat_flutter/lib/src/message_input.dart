@@ -71,6 +71,9 @@ typedef UserMentionTileBuilder = Widget Function(
   User user,
 );
 
+// call back function for log event
+typedef void MessageStringCallBack(String message);
+
 /// Widget builder for action button.
 ///
 /// [defaultActionButton] is the default [IconButton] configuration,
@@ -206,7 +209,7 @@ class MessageInput extends StatefulWidget {
     this.customOverlays = const [],
     this.mentionAllAppUsers = false,
     this.sendMessageIcon,
-    this.sendMessageIconIdle
+    this.sendMessageIconIdle, this.messageSentEvent,this.isEventLogMethodSet = false
   })  : assert(
           initialMessage == null || editMessage == null,
           "Can't provide both `initialMessage` and `editMessage`",
@@ -331,6 +334,9 @@ class MessageInput extends StatefulWidget {
   /// Send Icon idle
   final Widget? sendMessageIconIdle;
 
+  /// event log
+  final MessageStringCallBack? messageSentEvent;
+  final bool isEventLogMethodSet;
 
   @override
   MessageInputState createState() => MessageInputState();
@@ -1898,6 +1904,9 @@ class MessageInputState extends State<MessageInput> {
       final resp = await sendingFuture;
       if (resp.message?.type == 'error') {
         _parseExistingMessage(message);
+      }
+      else if(widget.isEventLogMethodSet){
+        widget.messageSentEvent!(text);
       }
       _startSlowMode();
       widget.onMessageSent?.call(resp.message);

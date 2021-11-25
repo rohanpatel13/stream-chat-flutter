@@ -14,6 +14,8 @@ class ChannelName extends StatelessWidget {
     Key? key,
     this.textStyle,
     this.textOverflow = TextOverflow.ellipsis,
+    this.onTap,
+    this.titleClick = false,
   }) : super(key: key);
 
   /// The style of the text displayed
@@ -21,6 +23,12 @@ class ChannelName extends StatelessWidget {
 
   /// How visual overflow should be handled.
   final TextOverflow textOverflow;
+
+  /// The onTap for locators
+  final void Function(Channel)? onTap;
+
+  final bool titleClick;
+
 
   @override
   Widget build(BuildContext context) {
@@ -83,11 +91,22 @@ class ChannelName extends StatelessWidget {
             }
           }
 
-          return Text(
+          return titleClick? InkWell(
+            onTap: ()=> onTap!(StreamChannel.of(context).channel),
+            child: Text(
+              channelName.startsWith('@')?channelName:"@"+channelName,
+              semanticsLabel: channelName.startsWith('@')?channelName:'@'+channelName,
+              style: textStyle,
+              overflow: textOverflow,
+            ),
+          ):
+          Text(
             channelName.startsWith('@')?channelName:"@"+channelName,
+            semanticsLabel: channelName.startsWith('@')?channelName:'@'+channelName,
             style: textStyle,
             overflow: textOverflow,
-          );
+          )
+          ;
         },
       );
 }

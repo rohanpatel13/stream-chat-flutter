@@ -1219,14 +1219,11 @@ class _MessageWidgetState extends State<MessageWidget>
       attachmentList.add(attachmentWidget);
     });
 
-    return Padding(
-      padding: widget.attachmentPadding,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: attachmentList.insertBetween(SizedBox(
-          height: widget.attachmentPadding.vertical / 2,
-        )),
-      ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: attachmentList.insertBetween(SizedBox(
+        height: widget.attachmentPadding.vertical / 2,
+      )),
     );
   }
 

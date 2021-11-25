@@ -52,6 +52,7 @@ class DeletedMessage extends StatelessWidget {
         ),
         child: Text(
           context.translations.messageDeletedLabel,
+          semanticsLabel: "message_deleted",
           style: messageTheme.messageTextStyle?.copyWith(
             fontStyle: FontStyle.italic,
             // color: messageTheme.createdAtStyle?.color,

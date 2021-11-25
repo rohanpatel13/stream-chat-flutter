@@ -265,6 +265,7 @@ class _ChannelListViewState extends State<ChannelListView> {
   }
 
   Widget _buildListView(BuildContext context, List<Channel> channels) {
+
     if (widget.crossAxisCount > 1) {
       return GridView.builder(
         padding: widget.padding,
