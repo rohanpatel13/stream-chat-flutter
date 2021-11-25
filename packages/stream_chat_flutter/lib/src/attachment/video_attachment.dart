@@ -120,14 +120,14 @@ class VideoAttachment extends AttachmentWidget {
                 ),
               ),
             ),
-            if (attachment.title != null)
-              Material(
-                color: messageTheme.messageBackgroundColor,
-                child: AttachmentTitle(
-                  messageTheme: messageTheme,
-                  attachment: attachment,
-                ),
-              ),
+            // if (attachment.title != null)
+            //   Material(
+            //     color: messageTheme.messageBackgroundColor,
+            //     child: AttachmentTitle(
+            //       messageTheme: messageTheme,
+            //       attachment: attachment,
+            //     ),
+            //   ),
           ],
         ),
       );

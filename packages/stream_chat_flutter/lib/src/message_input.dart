@@ -799,7 +799,7 @@ class MessageInputState extends State<MessageInput> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         StreamSvgIcon.lightning(
-                          color: _streamChatTheme.colorTheme.accentPrimary,
+                          color: Colors.white,
                           size: 16,
                         ),
                         Text(
