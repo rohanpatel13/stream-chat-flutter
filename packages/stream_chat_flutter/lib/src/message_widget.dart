@@ -624,6 +624,7 @@ class _MessageWidgetState extends State<MessageWidget>
         widget.showUserAvatar != DisplayWidget.gone ? avatarWidth + 8.5 : 0.5;
 
     final showReactions = _shouldShowReactions;
+    final isMyMessage = widget.message.user?.id == _streamChat.currentUser?.id;
 
     return Material(
       type: widget.message.pinned && widget.showPinHighlight
@@ -739,6 +740,7 @@ class _MessageWidgetState extends State<MessageWidget>
                                                             : 4.0,
                                                   ),
                                                   child: DeletedMessage(
+                                                    isMyMessage: isMyMessage,
                                                     borderRadiusGeometry: widget
                                                         .borderRadiusGeometry,
                                                     borderSide:

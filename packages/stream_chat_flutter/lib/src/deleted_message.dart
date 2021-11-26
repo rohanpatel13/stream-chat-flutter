@@ -13,6 +13,7 @@ class DeletedMessage extends StatelessWidget {
     this.shape,
     this.borderSide,
     this.reverse = false,
+    this.isMyMessage = false,
   }) : super(key: key);
 
   /// The theme of the message
@@ -29,6 +30,9 @@ class DeletedMessage extends StatelessWidget {
 
   /// If true the widget will be mirrored
   final bool reverse;
+
+  /// Is my message
+  final bool? isMyMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +60,7 @@ class DeletedMessage extends StatelessWidget {
           style: messageTheme.messageTextStyle?.copyWith(
             fontStyle: FontStyle.italic,
             // color: messageTheme.createdAtStyle?.color,
-            color: Colors.white,
+            color: isMyMessage! ? Colors.white : Colors.black,
           ),
         ),
       ),
