@@ -209,7 +209,8 @@ class MessageInput extends StatefulWidget {
     this.customOverlays = const [],
     this.mentionAllAppUsers = false,
     this.sendMessageIcon,
-    this.sendMessageIconIdle, this.messageSentEvent,this.isEventLogMethodSet = false
+    this.sendMessageIconIdle, this.messageSentEvent,this.isEventLogMethodSet = false,
+    this.shouldKeepFocusAfterMessage,
   })  : assert(
           initialMessage == null || editMessage == null,
           "Can't provide both `initialMessage` and `editMessage`",
@@ -337,6 +338,10 @@ class MessageInput extends StatefulWidget {
   /// event log
   final MessageStringCallBack? messageSentEvent;
   final bool isEventLogMethodSet;
+
+  /// Defines if the [MessageInput] loses focuses after a message is sent.
+  /// The default behaviour keeps focus until a command is enabled.
+  final bool? shouldKeepFocusAfterMessage;
 
   @override
   MessageInputState createState() => MessageInputState();
@@ -1219,7 +1224,9 @@ class MessageInputState extends State<MessageInput> {
   }
 
   Widget _buildMentionsOverlayEntry() {
-    if (textEditingController.value.selection.start < 0) {
+    final channel = StreamChannel.of(context).channel;
+    if (textEditingController.value.selection.start < 0 ||
+        channel.state == null) {
       return const Offstage();
     }
 
@@ -1248,7 +1255,7 @@ class MessageInputState extends State<MessageInput> {
       query: query,
       mentionAllAppUsers: widget.mentionAllAppUsers,
       client: StreamChat.of(context).client,
-      channel: StreamChannel.of(context).channel,
+      channel: channel,
       size: Size(renderObject.size.width - 16, 400),
       mentionsTileBuilder: tileBuilder,
       onMentionUserTap: (user) {
@@ -1700,7 +1707,6 @@ class MessageInputState extends State<MessageInput> {
       }
       final res = await FilePicker.platform.pickFiles(
         type: type,
-        withData: true,
       );
       if (res?.files.isNotEmpty == true) {
         file = res!.files.single.toAttachmentFile;
@@ -1824,7 +1830,9 @@ class MessageInputState extends State<MessageInput> {
       return;
     }
 
-    final shouldUnfocus = _commandEnabled;
+    var shouldKeepFocus = widget.shouldKeepFocusAfterMessage;
+
+    shouldKeepFocus ??= !_commandEnabled;
 
     if(_commandEnabled){
       _focusNode.unfocus();
@@ -1897,9 +1905,11 @@ class MessageInputState extends State<MessageInput> {
         sendingFuture = channel.updateMessage(message);
       }
 
-      // if (!shouldUnfocus) {
-      //   FocusScope.of(context).requestFocus(_focusNode);
-      // }
+      if (shouldKeepFocus) {
+        FocusScope.of(context).requestFocus(_focusNode);
+      } else {
+        FocusScope.of(context).unfocus();
+      }
 
       final resp = await sendingFuture;
       if (resp.message?.type == 'error') {
