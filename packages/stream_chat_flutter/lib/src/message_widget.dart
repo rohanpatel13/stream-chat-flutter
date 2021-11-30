@@ -984,7 +984,7 @@ class _MessageWidgetState extends State<MessageWidget>
         ...children.map(
           (child) {
             Widget mappedChild = SizedBox(
-              height: context.textScaleFactor * 14,
+              height: context.textScaleFactor * 16,
               child: child,
             );
             if (child.key == usernameKey) {
