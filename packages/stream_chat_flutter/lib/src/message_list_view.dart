@@ -1345,7 +1345,7 @@ class _MessageListViewState extends State<MessageListView> {
           WidgetsBinding.instance!.addPostFrameCallback((_) {
             _scrollController?.scrollTo(
               index: 0,
-              duration: const Duration(seconds: 1),
+              duration: const Duration(microseconds: 500),
             );
           });
         }
