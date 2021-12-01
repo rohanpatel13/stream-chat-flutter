@@ -267,39 +267,43 @@ class _ChannelListViewState extends State<ChannelListView> {
   }
 
   Widget _buildListView(BuildContext context, List<Channel> channels) {
-
     // ignore: parameter_assignments
     channels = channels.map((channel) => channel.state!.channelState.
     messages != null && channel.state!.channelState.
     messages.length != 0 ? channel : null).cast<Channel>().toList();
     // ignore: unnecessary_null_comparison, cascade_invocations
     channels.removeWhere((element) => element==null);
-    if (widget.crossAxisCount > 1) {
-      return GridView.builder(
+    if(channels.isNotEmpty) {
+      if (widget.crossAxisCount > 1) {
+        return GridView.builder(
+          padding: widget.padding,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: widget.crossAxisCount,
+          ),
+          itemCount: channels.length,
+          physics: const AlwaysScrollableScrollPhysics(),
+          itemBuilder: (context, index) =>
+              _gridItemBuilder(context, index, channels),
+        );
+      }
+      return ListView.separated(
         padding: widget.padding,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: widget.crossAxisCount,
-        ),
-        itemCount: channels.length,
         physics: const AlwaysScrollableScrollPhysics(),
+        // all channels + progress loader
+        itemCount: channels.length + 1,
+        separatorBuilder: (_, index) {
+          if (widget.separatorBuilder != null) {
+            return widget.separatorBuilder!(context, index);
+          }
+          return _separatorBuilder(context, index);
+        },
         itemBuilder: (context, index) =>
-            _gridItemBuilder(context, index, channels),
+            _listItemBuilder(context, index, channels),
       );
     }
-    return ListView.separated(
-      padding: widget.padding,
-      physics: const AlwaysScrollableScrollPhysics(),
-      // all channels + progress loader
-      itemCount: channels.length + 1,
-      separatorBuilder: (_, index) {
-        if (widget.separatorBuilder != null) {
-          return widget.separatorBuilder!(context, index);
-        }
-        return _separatorBuilder(context, index);
-      },
-      itemBuilder: (context, index) =>
-          _listItemBuilder(context, index, channels),
-    );
+    else{
+      return _buildEmptyWidget(context);
+    }
   }
 
   Widget _buildEmptyWidget(BuildContext context) =>

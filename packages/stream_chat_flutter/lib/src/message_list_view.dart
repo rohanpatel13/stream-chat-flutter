@@ -1241,7 +1241,7 @@ class _MessageListViewState extends State<MessageListView> {
       initialAlignment = _initialAlignment;
 
       WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
-        _scrollController?.jumpTo(
+        _scrollController!.jumpTo(
           index: initialIndex,
           alignment: initialAlignment,
         );
@@ -1256,7 +1256,7 @@ class _MessageListViewState extends State<MessageListView> {
             if (event.message!.user!.id ==
                 streamChannel!.channel.client.state.currentUser!.id) {
               WidgetsBinding.instance!.addPostFrameCallback((_) {
-                _scrollController?.jumpTo(
+                _scrollController!.jumpTo(
                   index: 0,
                 );
               });
