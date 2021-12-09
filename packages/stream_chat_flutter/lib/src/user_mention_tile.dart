@@ -61,15 +61,15 @@ class UserMentionTile extends StatelessWidget {
                         style: chatThemeData.textTheme.bodyBold,
                       ),
                   const SizedBox(height: 2),
-                  subtitle ??
-                      Text(
-                        '@${user.id}',
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: chatThemeData.textTheme.footnoteBold.copyWith(
-                          color: chatThemeData.colorTheme.textLowEmphasis,
-                        ),
-                      ),
+                  // subtitle ??
+                  //     Text(
+                  //       '@${user.id}',
+                  //       maxLines: 1,
+                  //       overflow: TextOverflow.ellipsis,
+                  //       style: chatThemeData.textTheme.footnoteBold.copyWith(
+                  //         color: chatThemeData.colorTheme.textLowEmphasis,
+                  //       ),
+                  //     ),
                 ],
               ),
             ),
