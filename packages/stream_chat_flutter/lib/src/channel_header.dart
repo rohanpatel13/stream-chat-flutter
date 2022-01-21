@@ -71,6 +71,7 @@ class ChannelHeader extends StatelessWidget implements PreferredSizeWidget {
     this.actions,
     this.backgroundColor,
     this.avatarBottomRightIcon,
+    this.avatarMargin,
   })  : preferredSize = const Size.fromHeight(kToolbarHeight),
         super(key: key);
 
@@ -111,6 +112,9 @@ class ChannelHeader extends StatelessWidget implements PreferredSizeWidget {
 
   /// Avatar bottom right icon
   final Widget? avatarBottomRightIcon;
+
+  /// Avatar margin
+  final EdgeInsets? avatarMargin;
 
   @override
   Widget build(BuildContext context) {
@@ -205,12 +209,13 @@ class ChannelHeader extends StatelessWidget implements PreferredSizeWidget {
                     Center(
                       child: Stack(
                         children: [
-                          ChannelAvatar(
-                            borderRadius:
-                            channelHeaderTheme.avatarTheme?.borderRadius,
-                            constraints:
-                            channelHeaderTheme.avatarTheme?.constraints,
-                            onTap: onImageTap,
+                          Container(
+                            margin: avatarMargin,
+                            child: ChannelAvatar(
+                              borderRadius: channelHeaderTheme.avatarTheme?.borderRadius,
+                              constraints: channelHeaderTheme.avatarTheme?.constraints,
+                              onTap: onImageTap,
+                            ),
                           ),
 
                           if (avatarBottomRightIcon != null)
