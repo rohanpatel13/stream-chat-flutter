@@ -169,6 +169,7 @@ class MessageListView extends StatefulWidget {
     this.paginationLimit = 20,
     this.sendIconButton,
     this.sendIconButtonIdle,
+    this.ownMessageBackgroundColor,
   }) : super(key: key);
 
   /// Function used to build a custom message widget
@@ -289,6 +290,9 @@ class MessageListView extends StatefulWidget {
 
   /// Send Icon botton Idle
   final Widget? sendIconButtonIdle;
+
+  /// Own Message Background Color
+  final Color? ownMessageBackgroundColor;
 
   /// isPush flag
   static bool isPush = false;
@@ -911,7 +915,7 @@ class _MessageListViewState extends State<MessageListView> {
       borderSide: isMyMessage || isOnlyEmoji ? BorderSide.none : null,
       showUserAvatar: isMyMessage ? DisplayWidget.gone : DisplayWidget.show,
       messageTheme: isMyMessage
-          ? _streamTheme.ownMessageTheme
+          ? (widget.ownMessageBackgroundColor != null) ? _streamTheme.ownMessageTheme.copyWith(messageBackgroundColor: widget.ownMessageBackgroundColor) : _streamTheme.ownMessageTheme
           : _streamTheme.otherMessageTheme,
       onReturnAction: (action) {
         switch (action) {
@@ -1126,7 +1130,7 @@ class _MessageListViewState extends State<MessageListView> {
         horizontal: isOnlyEmoji ? 0 : 16.0,
       ),
       messageTheme: isMyMessage
-          ? _streamTheme.ownMessageTheme
+          ? (widget.ownMessageBackgroundColor != null) ? _streamTheme.ownMessageTheme.copyWith(messageBackgroundColor: widget.ownMessageBackgroundColor) : _streamTheme.ownMessageTheme
           : _streamTheme.otherMessageTheme,
       readList: readList,
       allRead: allRead,
