@@ -70,6 +70,7 @@ class ChannelHeader extends StatelessWidget implements PreferredSizeWidget {
     this.leading,
     this.actions,
     this.backgroundColor,
+    this.avatarBottomRightIcon,
   })  : preferredSize = const Size.fromHeight(kToolbarHeight),
         super(key: key);
 
@@ -107,6 +108,9 @@ class ChannelHeader extends StatelessWidget implements PreferredSizeWidget {
 
   /// The background color for this [ChannelHeader].
   final Color? backgroundColor;
+
+  /// Avatar bottom right icon
+  final Widget? avatarBottomRightIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -199,12 +203,24 @@ class ChannelHeader extends StatelessWidget implements PreferredSizeWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Center(
-                      child: ChannelAvatar(
-                        borderRadius:
-                        channelHeaderTheme.avatarTheme?.borderRadius,
-                        constraints:
-                        channelHeaderTheme.avatarTheme?.constraints,
-                        onTap: onImageTap,
+                      child: Stack(
+                        children: [
+                          ChannelAvatar(
+                            borderRadius:
+                            channelHeaderTheme.avatarTheme?.borderRadius,
+                            constraints:
+                            channelHeaderTheme.avatarTheme?.constraints,
+                            onTap: onImageTap,
+                          ),
+
+                          if (avatarBottomRightIcon != null)
+                            Positioned.fill(
+                              child: Align(
+                                alignment: Alignment.bottomRight,
+                                child: avatarBottomRightIcon,
+                              ),
+                            ),
+                        ],
                       ),
                     ),
                     const SizedBox(width: 6),
