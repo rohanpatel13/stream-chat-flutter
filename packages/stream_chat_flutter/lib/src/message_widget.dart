@@ -1162,39 +1162,43 @@ class _MessageWidgetState extends State<MessageWidget>
 
   void _showMessageReactionsModalBottomSheet(BuildContext context) {
     final channel = StreamChannel.of(context).channel;
+    final theme = StreamChatTheme.of(context);
     showDialog(
       useRootNavigator: false,
       context: context,
       barrierColor: _streamChatTheme.colorTheme.overlay,
-      builder: (context) => StreamChannel(
-        channel: channel,
-        child: MessageReactionsModal(
-          messageWidget: widget.copyWith(
-            key: const Key('MessageWidget'),
-            message: widget.message.copyWith(
-              text: (widget.message.text?.length ?? 0) > 200
-                  ? '${widget.message.text!.substring(0, 200)}...'
-                  : widget.message.text,
+      builder: (context) => StreamChatTheme(
+        data: theme,
+        child: StreamChannel(
+          channel: channel,
+          child: MessageReactionsModal(
+            messageWidget: widget.copyWith(
+              key: const Key('MessageWidget'),
+              message: widget.message.copyWith(
+                text: (widget.message.text?.length ?? 0) > 200
+                    ? '${widget.message.text!.substring(0, 200)}...'
+                    : widget.message.text,
+              ),
+              showReactions: false,
+              showUsername: false,
+              showTimestamp: false,
+              translateUserAvatar: false,
+              showSendingIndicator: false,
+              padding: const EdgeInsets.all(0),
+              showReactionPickerIndicator: widget.showReactions &&
+                  (widget.message.status == MessageSendingStatus.sent),
+              showPinHighlight: false,
+              showUserAvatar:
+                  widget.message.user!.id == channel.client.state.currentUser!.id
+                      ? DisplayWidget.gone
+                      : DisplayWidget.show,
             ),
-            showReactions: false,
-            showUsername: false,
-            showTimestamp: false,
-            translateUserAvatar: false,
-            showSendingIndicator: false,
-            padding: const EdgeInsets.all(0),
-            showReactionPickerIndicator: widget.showReactions &&
-                (widget.message.status == MessageSendingStatus.sent),
-            showPinHighlight: false,
-            showUserAvatar:
-                widget.message.user!.id == channel.client.state.currentUser!.id
-                    ? DisplayWidget.gone
-                    : DisplayWidget.show,
+            onUserAvatarTap: widget.onUserAvatarTap,
+            messageTheme: widget.messageTheme,
+            reverse: widget.reverse,
+            message: widget.message,
+            showReactions: widget.showReactions,
           ),
-          onUserAvatarTap: widget.onUserAvatarTap,
-          messageTheme: widget.messageTheme,
-          reverse: widget.reverse,
-          message: widget.message,
-          showReactions: widget.showReactions,
         ),
       ),
     );
