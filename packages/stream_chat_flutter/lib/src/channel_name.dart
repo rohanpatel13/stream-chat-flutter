@@ -91,6 +91,10 @@ class ChannelName extends StatelessWidget {
             }
           }
 
+          channelName =  channelName.length > 12
+              ? '${channelName.substring(0, 12)}...'
+              : channelName;
+
           return titleClick? InkWell(
             onTap: ()=> onTap!(StreamChannel.of(context).channel),
             child: Text(
