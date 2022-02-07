@@ -91,8 +91,8 @@ class ChannelName extends StatelessWidget {
             }
           }
 
-          channelName =  channelName.length > 12
-              ? '${channelName.substring(0, 12)}...'
+          channelName =  channelName.length > 14
+              ? '${channelName.substring(0, 14)}...'
               : channelName;
 
           return titleClick? InkWell(
